@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!--{{post}}-->
+<br>
+<h1>
+<center>
+{{post_name}}
+</center>
+</h1>
+<br><br>
+{{post_body}}
+<br>Written by <a href="/blog?user={{owner.id}}">{{owner.email}}</a>
+<!--WHOOOOOOOOOOOOO-->
+
+    <!--{% for post in posts %}-->
+    <!--{{posts[post_a].name}}-->
+
+    <!--{{posts[post_a].body}}-->
+    <!--<form method="POST" action="/delete-post">
+        <input type="hidden" name="post-id" value="{{post.id}}" />
+        <input type="submit" value="Bye!" />
+    </form>
+    <hr />-->
+    
+    <!--{% endfor %}-->
+
+{% endblock %}

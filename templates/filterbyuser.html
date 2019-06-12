@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    {% if posts|length == 0 %}
+    <p>No posts yet</p>
+    {% else %}
+
+        <ul>
+            {% for post in posts %}
+            <a href="/view-post?post-id={{post.id}}"><h3>{{post.name}}</h3></a>
+            <!--<h3>{{post.name}}</h3>-->
+            
+            {{post.body}}
+            <br>
+            {{post.owner.email}}
+            <!--<form method="POST" action="/delete-post">
+                <input type="hidden" name="post-id" value="{{post.id}}" />
+                <input type="submit" value="Bye, '{{post.name}}'" />
+            </form>-->
+            <!--<br>
+            <form method="GET" action="/view-post">
+                <input type="hidden" name="post-id" value="{{post.id}}" />
+                <input type="submit" value="View!" />
+            </form>-->
+            <br>
+            <hr />
+            
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+{% endblock %}

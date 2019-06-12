@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!---Hi-->
+    <h1>Post Form</h1>
+    <form method='post'>
+        <label>
+            Add Post:
+            <input type="text" name='a_post' />
+        </label>
+        <!--<input type="submit" value='Add Post' />-->
+        <br><br>
+        <label>
+            Add Body:
+            <textarea name='a_body'></textarea>
+        </label>
+        <br><br>
+        <input type="submit" value='Add Post' />
+        <span class="error">{{post_error}}</span>
+    </form>
+
+{% endblock %}

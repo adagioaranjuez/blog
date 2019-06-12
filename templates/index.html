@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    
+    {% if owners|length == 0 %}
+    <p>No users yet</p>
+    {% else %}
+
+        <ul>
+            {% for owner in owners %}
+            <a href="/blog?user={{owner.id}}"><h3>{{owner.email}}</h3></a>  <!--#/-->         
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+{% endblock %}
