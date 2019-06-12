@@ -70,10 +70,6 @@ def require_login():
     if request.endpoint not in allowed_routes and 'email' not in session:
         return redirect('/login')
 
-#@app.route('/')
-#def index():
-#    template = jinja_env.get_template('index.html')
-#    return template.render()
 
 #It's been awhile. I want to say this displays posts of all users.
 @app.route('/blog') #/
@@ -93,7 +89,7 @@ def blog():
     return render_template('blog.html', posts=posts, owner=owner)
 
 #This displays blogs of selected users.
-@app.route('/singleUser')  #userblogs #########post.owner.email, owner = User.que...filter_by
+@app.route('/singleUser')
 def blogselecteduser():
     
     owner = User.query.filter_by(email=session['email']).first() #
@@ -129,8 +125,7 @@ def a_post():
 	#Check if a blog post is only a space or is empty and asks for a post with characters.
         if check_for_space(post_name) or check_for_space(post_body) or post_name.isspace() or post_body.isspace():
             post_error = "Please no posts that are empty or only spaces."
-            #template = jinja_env.get_template('addpost.html') 
-            #return template.render(post_name=post_name, post_body=post_body, post_error = post_error)
+
             return render_template('addpost.html', post_name=post_name, post_body=post_body, post_error = post_error)
 
 	#This is the code that adds the post to the database.
@@ -139,21 +134,10 @@ def a_post():
             new_post = Post(post_name, post_body, owner)#### next argument?(post_name, post_body)
             db.session.add(new_post)
             db.session.commit()
-
-            #template = jinja_env.get_template('viewblog2.html')
-            #return template.render(post_name=post_name, post_body=post_body)
 		
             #After post is added, the website redirects to a page displaying the name and body of new post.
             return render_template('viewblog2.html', post_name=post_name, post_body=post_body, owner=owner)
-            #return render_template('viewblog.html', post=post)
 
-
-    
-
-    #b4jinja#return render_template('addpost.html', title ="A POST", posts=posts)
-       
-    #template = jinja_env.get_template('addpost.html') 
-    #return template.render(posts=posts) #variables auto ="", no need to set-up
 
     return render_template('addpost.html', post=post)
 
@@ -175,8 +159,6 @@ def view_post():
     post_id = int(request.args.get('post-ideal'))
     post = Post.query.get(post_id)
 
-    #template = jinja_env.get_template('viewblog.html')
-    #return template.render(post=post)
     return render_template('viewblog.html', post=post)
 
 #This is used to allow the user to login.
@@ -194,7 +176,6 @@ def login():
         else:
             #TODO - explain why login failed
             flash("User password incorrect, or user does not exist", "error")
-            #return redirect('/login')
 
     return render_template('login.html')
 
@@ -227,10 +208,7 @@ def usersignup(): #usersignup
             flash("Please no blanks or space in password.", "error")
         elif is_three(password):
             flash("Please enter a password greater than 3","error")
-        
-            #TODO - user better response messaging
-            #return render_template('register.html') #'<h1>Duplicate user!</h1>' #usersignup
-	
+        	
 	
 	#If user does not already exist, add new user to database.
         else:
